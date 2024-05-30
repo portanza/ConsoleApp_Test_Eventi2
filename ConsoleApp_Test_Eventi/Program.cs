@@ -66,16 +66,16 @@ namespace ConsoleApp_Test_Eventi
                 }
             }
 
-            // Creazione di un'istanza del conto bancario
+            // Creazione di un'istanza del conto bancario - EMITTENTE
             ContoBancario conto = new ContoBancario(importoDecimalContoBancario);
             
 
-            // Creazione di un'istanza del notificatore
+            // Creazione di un'istanza del notificatore - RICEVENTE che compie l'AZIONE
             Notificatore notificatore = new Notificatore();
 
             // Associazione del gestore dell'evento al metodo (lanciare) del notificatore
             //il postino riceve la lettera e la invia quando si verifca l'evento saldo insufficiente.
-            conto.SaldoInsufficiente += notificatore.MostraMessaggio_insufficiente;
+            conto.SaldoInsufficiente += notificatore.MostraMessaggio_insufficiente; // COLLEGAMENTO TRA EMITTENTE E RICEVENTE.
             conto.Preleva += notificatore.MostraMessaggio_DomandaNuovoPrelievo;
             
             // Tentativo di prelievo con importo superiore al saldo
