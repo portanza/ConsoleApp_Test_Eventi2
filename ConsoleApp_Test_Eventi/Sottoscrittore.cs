@@ -6,10 +6,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp_Test_Eventi
 {
-    // Classe sottoscrittrice (subscriber) che gestisce l'evento
-    // crea la lettera da inserire nella busta contente le azioni da eseguire
-    public class Notificatore
+    // Classe sottoscrittrice (subscriber) che esegue un'azione al verificarsi di un evento.
+    //Prima si crea la classe del subscriber: dobbiamo prima sapere che azioni devono essere fatte
+    //e quindi capire il tipo di valore da ritornare.
+    //In questo caso è un void senza quindi andremo a creare
+    //- un delegato con la stessa firma
+    //- un evento del tipo del deleagato appena creato.
+  
+    public class Sottoscrittore
     {
+        
+        //Questo metodo può ricevere il segnale dal publisher (informatore) perché 
+        //la firma del metodo è la stessa del delegato.
+        //Ricevuto l'ok che si è verificato l'evento a cui "può" essere agganciato,
+        //compie un'azione.
+
+
         public void MostraMessaggio_insufficiente(object sender, EventArgs e)
         {
             Console.WriteLine("Attenzione: Saldo insufficiente!");
@@ -17,7 +29,7 @@ namespace ConsoleApp_Test_Eventi
         public void MostraMessaggio_DomandaNuovoPrelievo(object sender, EventArgs e, decimal saldoProprietà, decimal importoProprietà)
         {
 
-            saldoProprietà -= importoProprietà;
+         
             Console.WriteLine($"Prelievo di {importoProprietà} effettuato. Nuovo saldo: {importoProprietà}");
 
             // Aggiorna il saldo utilizzando il nuovo metodo

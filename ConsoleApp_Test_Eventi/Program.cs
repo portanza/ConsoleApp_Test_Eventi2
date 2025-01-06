@@ -12,15 +12,17 @@ namespace ConsoleApp_Test_Eventi
     {
         static void Main()
         {
+            #region GESTORE INTERFACCIA INSERIMENTO DATI
 
+            #region INSERIMENTO IMPORTO CONTO CORRENTE E CONTROLLO DEL DATO INSERITO
             bool erroreContoBancario = true;
             decimal importoDecimalContoBancario = 0;
             while (erroreContoBancario == true)
             {
             string ? importoStringContoBancario = "";
             Console.Clear();
-            Console.WriteLine("Inserisci l'importo del Conto Bancario");
-            Console.WriteLine("Conto Bancario: ");
+            Console.WriteLine("Inserisci l'importo del Conto Bancario e premi invio.");
+            Console.Write("Conto Bancario: ");
 
 
             importoStringContoBancario = Console.ReadLine();
@@ -35,12 +37,14 @@ namespace ConsoleApp_Test_Eventi
             else
                 {
                     erroreContoBancario = true;
+                    Console.WriteLine("Sei un cretino!");
+                    Thread.Sleep(3000);
                     //Console.Clear();
                 }
             }
+            #endregion
 
-
-
+            #region INSERIMENTO IMPORTO DA PRELEVARE E CONTROLLO DEL DATO INSERITO
             bool errorePrelievo = true;
             decimal importoDecimalPrelievo = 0;
             while (errorePrelievo == true)
@@ -48,7 +52,7 @@ namespace ConsoleApp_Test_Eventi
                 string? importoStringPrelievo = "";
                 Console.Clear();
                 Console.WriteLine("Quanto vuoi prelevare?");
-                Console.WriteLine("Importo: ");
+                Console.Write("Importo: ");
 
 
                 importoStringPrelievo = Console.ReadLine();
@@ -61,19 +65,26 @@ namespace ConsoleApp_Test_Eventi
                 }
                 else
                 {
+                    Console.WriteLine("Sei un cretino!");
+                    Thread.Sleep(3000);
                     errorePrelievo = true;
                     //Console.Clear();
                 }
+                
             }
+            #endregion
+
+            #endregion
+
 
             // Creazione di un'istanza del conto bancario
             ContoBancario conto = new ContoBancario(importoDecimalContoBancario);
             
 
             // Creazione di un'istanza del notificatore
-            Notificatore notificatore = new Notificatore();
+            Sottoscrittore notificatore = new Sottoscrittore();
 
-            // Associazione del gestore dell'evento al metodo (lanciare) del notificatore
+            // Associazione del gestore dell'evento ad un metodo del sottoscrittore
             //il postino riceve la lettera e la invia quando si verifca l'evento saldo insufficiente.
             conto.SaldoInsufficiente += notificatore.MostraMessaggio_insufficiente;
             conto.Preleva += notificatore.MostraMessaggio_DomandaNuovoPrelievo;
